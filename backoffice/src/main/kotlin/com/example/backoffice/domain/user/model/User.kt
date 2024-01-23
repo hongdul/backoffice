@@ -5,15 +5,15 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "app_user")
 class User(
-    @Column(name = "email")
-    val userEmail: String,
+    @Column(name = "email", nullable = false)
+    val email: String,
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     val password: String,
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    val userRole: UserRole
+    @Column(name = "role", nullable = false)
+    val role: UserRole
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
