@@ -1,5 +1,6 @@
 package com.example.backoffice.domain.menu.model
 
+import com.example.backoffice.domain.menu.dto.MenuResponse
 import com.example.backoffice.domain.store.model.Store
 import jakarta.persistence.*
 
@@ -31,5 +32,17 @@ class Menu(
 //    val reviews = MutableList<Review> = mutableListOf()
 
 ) {
+
+}
+
+fun Menu.toResponse(): MenuResponse {
+    return MenuResponse(
+        id = id!!,
+        name = name,
+        description = description,
+        status = status,
+        price = price,
+        storeId = store.id!!
+    )
 
 }
