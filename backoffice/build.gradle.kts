@@ -42,6 +42,7 @@ dependencies {
     implementation("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta") // 추가!
     kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta") // 추가!
 
+    implementation("com.h2database:h2") // 돌아가는지 확인을 위한 임시 db
 
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
