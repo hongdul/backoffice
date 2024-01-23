@@ -1,75 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="b32f2806-77dc-45ef-a829-f404f2299106" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/exception/dto/ErrorResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/exception/dto/GlobalExceptionHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/exception/dto/MenuNotFoundException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/exception/dto/StoreNotFoundException.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/CreateStoreRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/UpdateStoreRequest.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/model/StoreEntity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/controller/StoreController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/controller/StoreController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/StoreResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/StoreResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreServiceImpl.kt" afterDir="false" />
-    </list>
+    <list default="true" id="b32f2806-77dc-45ef-a829-f404f2299106" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/backoffice">
-      <ProjectState />
-    </projectState>
-  </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Kotlin Class" />
-        <option value="Kotlin Data Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
-      </map>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2bInnOTqTNkLxbDZzO8fLDlOMAJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -78,33 +25,17 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "JJY",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/준용/IdeaProjects/backoffice",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
+    "last_opened_file_path": "/Users/geonwookim/Desktop/backoffice",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="BackofficeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="backoffice.backoffice.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.backoffice.BackofficeApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.9-temurin-17.0.9-f644763e9732-636ea113" />
+        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-5f3ff201" />
       </set>
     </attachedChunks>
   </component>
@@ -117,39 +48,10 @@
       <option name="presentableId" value="Default" />
       <updated>1705911626877</updated>
       <workItem from="1705911629393" duration="69000" />
-      <workItem from="1705979397646" duration="1183000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="JJY" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$/.." />
-    </ignored-roots>
   </component>
 </project>
