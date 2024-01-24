@@ -11,7 +11,7 @@ data class UserDto(
         fun from(user: User): UserDto {
             return UserDto(
                 email = user.email,
-                role = UserRole.MEMBER
+                role = user.role
             )
         }
     }
