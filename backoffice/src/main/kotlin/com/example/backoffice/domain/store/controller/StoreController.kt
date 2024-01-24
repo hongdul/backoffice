@@ -5,6 +5,8 @@ import com.example.backoffice.domain.store.dto.StoreInfo
 import com.example.backoffice.domain.store.dto.StoreResponse
 import com.example.backoffice.domain.store.dto.UpdateStoreArguments
 import com.example.backoffice.domain.store.service.StoreService
+import com.example.backoffice.domain.user.service.UserService
+import com.example.backoffice.infra.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -20,21 +22,19 @@ class StoreController(
     val storeService: StoreService,
 ) {
 
-//    @Operation(summary = "가게 등록")
-//    @PostMapping
-//    fun createStore(
-//        @RequestBody createStoreArguments: CreateStoreArguments
-//        authentication: Authentication
-//    ): ResponseEntity<StoreResponse> {
-//        val userPrincipal = authentication.principal
-//        val seller = UserService.findById(userPrincipal.id)
-//
-//        val store = storeService.createStore(createStoreArguments, seller)
-//
-//        return ResponseEntity
-//            .status(HttpStatus.CREATED)
-//            .body(store)
-//    }
+    @Operation(summary = "가게 등록")
+    @PostMapping
+    fun createStore(
+        @RequestBody createStoreArguments: CreateStoreArguments,
+        authentication: Authentication
+    ): ResponseEntity<StoreResponse> {
+        val userPrincipal = authentication.principal as UserPrincipal
+        val store = storeService.createStore(createStoreArguments, userPrincipal.to())
+
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(store)
+    }
 
     @Operation(summary = "가게목록 조회")
     @GetMapping
