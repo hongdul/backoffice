@@ -22,6 +22,7 @@ class UserServiceImpl(
     private val jwtPlugin: JwtPlugin,
 
 ) : UserService {
+  
     @Transactional
     override fun signUp(userSignUpRequest: UserSignUpRequest): UserDto {
         if (userRepository.existsByEmail(userSignUpRequest.email)) {
