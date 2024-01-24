@@ -1,7 +1,7 @@
 package com.example.backoffice.domain.user.dto
 
-data class UserSignUpRequest(
-    val nickname: String,
+data class LoginRequest(
     val email: String,
     val password: String,
+
 )

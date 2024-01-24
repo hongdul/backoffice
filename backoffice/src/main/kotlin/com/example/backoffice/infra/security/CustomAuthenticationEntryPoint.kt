@@ -21,7 +21,7 @@ class CustomAuthenticationEntryPoint : AuthenticationEntryPoint {
         response.characterEncoding = "UTF-8"
 
         val objectMapper = ObjectMapper()
-        val jsonString = objectMapper.writeValueAsString(ErrorResponse("JWT verification failed", "인증되지 않음."))
+        val jsonString = objectMapper.writeValueAsString(ErrorResponse("JWT verification failed"))
         response.writer.write(jsonString)
     }
 }

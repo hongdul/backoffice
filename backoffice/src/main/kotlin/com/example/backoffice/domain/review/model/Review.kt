@@ -1,6 +1,7 @@
 package com.example.backoffice.domain.review.model
 
 import com.example.backoffice.domain.menu.model.Menu
+import com.example.backoffice.domain.user.model.User
 import jakarta.persistence.*
 
 
@@ -22,9 +23,10 @@ class Review(
     @JoinColumn(name = "menuId", nullable = false)
     val menu: Menu,
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "userId", nullable = false)
-//    val user: User,
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    val user: User
 ) {
+
+
 }

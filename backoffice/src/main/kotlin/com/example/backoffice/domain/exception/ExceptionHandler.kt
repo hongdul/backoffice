@@ -9,13 +9,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class ExceptionHandler {
 
     @ExceptionHandler(StoreNotFoundException::class)
-    fun handleCardNotFoundException(e: StoreNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleStoreNotFoundException(e: StoreNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
     @ExceptionHandler(MenuNotFoundException::class)
-    fun handleCommentNotFoundException(e: MenuNotFoundException): ResponseEntity<ErrorResponse> {
+    fun handleMenuNotFoundException(e: MenuNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ErrorResponse(e.message))
+    }
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFoundException(e: UserNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))

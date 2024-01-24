@@ -1,14 +1,62 @@
 package com.example.backoffice.domain.user.service
 
+import com.example.backoffice.domain.exception.UserNotFoundException
+import com.example.backoffice.domain.user.dto.LoginRequest
 import com.example.backoffice.domain.user.dto.UserDto
 import com.example.backoffice.domain.user.dto.UserSignUpRequest
+import com.example.backoffice.domain.user.model.User
+import com.example.backoffice.domain.user.model.UserRole
+import com.example.backoffice.domain.user.repository.UserRepository
+import com.example.backoffice.infra.security.jwt.JwtPlugin
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Service
 
-class UserServiceImpl(): UserService {
+@Service
+class UserServiceImpl(
+    val userRepository: UserRepository,
+    private val passwordEncoder: PasswordEncoder,
+    private val jwtPlugin: JwtPlugin,
+) : UserService {
     override fun signUp(userSignUpRequest: UserSignUpRequest): UserDto {
-        TODO(" 클라이언트로 유저정보 받고 DB에 저장후 dto로 변환 후 반환")
+        if (userRepository.existsByEmail(userSignUpRequest.email)) {
+            throw IllegalStateException("Email is already in use")
+        }
+        val user = User(
+            email = userSignUpRequest.email,
+            nickname = userSignUpRequest.nickname,
+            password = passwordEncoder.encode(userSignUpRequest.password),
+            role = UserRole.CUSTOMER
+        )
+
+        val createdUser = userRepository.save(user)
+
+        val token = jwtPlugin.generateAccessToken(
+            subject = user.id.toString(),
+            email = user.email,
+            nickname = user.nickname,
+            role = user.role.name
+        )
+
+        return UserDto.from(createdUser, token)
     }
 
-    override fun login() {
-        TODO("Not yet implemented")
+    override fun login(loginRequest: LoginRequest): UserDto {
+        val user = userRepository.findByEmail(loginRequest.email)
+            ?: throw UserNotFoundException(loginRequest.email)
+
+        if (user.email != loginRequest.email ||
+            !passwordEncoder.matches(loginRequest.password, user.password)
+        ) {
+            throw Exception("authentication failed")
+        }
+
+        val token = jwtPlugin.generateAccessToken(
+            subject = user.id.toString(),
+            nickname = user.nickname,
+            email = user.email,
+            role = user.role.name
+        )
+
+        return UserDto.from(user, token)
     }
 }
