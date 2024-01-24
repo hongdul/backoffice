@@ -22,6 +22,6 @@ class Profile(
     val user: User
 ) {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-var id: Long? = null
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 }

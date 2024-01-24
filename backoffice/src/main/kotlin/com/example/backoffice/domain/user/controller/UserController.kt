@@ -1,6 +1,8 @@
 package com.example.backoffice.domain.user.controller
 
 import com.example.backoffice.domain.user.dto.UserDto
+import com.example.backoffice.domain.user.dto.UserLoginRequest
+import com.example.backoffice.domain.user.dto.UserLoginResponse
 import com.example.backoffice.domain.user.dto.UserSignUpRequest
 import com.example.backoffice.domain.user.service.UserService
 import io.swagger.v3.oas.annotations.Operation
@@ -19,5 +21,13 @@ class UserController(val userService: UserService) {
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(userService.signUp(userSignUpRequest))
+    }
+
+    @Operation(summary = "로그인")
+    @PostMapping("/login")
+    fun login(@RequestBody userLoginRequest: UserLoginRequest): ResponseEntity<UserLoginResponse> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(userService.login(userLoginRequest))
     }
 }
