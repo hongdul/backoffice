@@ -1,9 +1,7 @@
 package com.example.backoffice.domain.user.service
 
-import com.example.backoffice.domain.user.dto.UserDto
-import com.example.backoffice.domain.user.dto.UserSignUpRequest
-
+import com.example.backoffice.domain.user.dto.*
 interface UserService {
     fun signUp(userSignUpRequest: UserSignUpRequest): UserDto
-    fun login()
+    fun login(userLoginRequest: UserLoginRequest): UserLoginResponse
 }

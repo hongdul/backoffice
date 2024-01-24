@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.6"
+    id("org.springframework.boot") version "3.2.1"
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
-    kotlin("plugin.noarg") version "1.8.22"
+    kotlin("plugin.spring") version "1.9.21"
+    kotlin("plugin.noarg") version "1.9.22"
     kotlin("plugin.allopen") version "1.8.22"
     kotlin("kapt") version "1.8.22" // 추가!
 }
@@ -41,6 +41,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta") // 추가!
     kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta") // 추가!
+//    implementation("com.h2database:h2")
 
 
     runtimeOnly("org.postgresql:postgresql")
