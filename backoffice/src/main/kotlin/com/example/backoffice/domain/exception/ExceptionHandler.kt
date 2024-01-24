@@ -28,10 +28,18 @@ class ExceptionHandler {
             .status(HttpStatus.UNAUTHORIZED)
             .body(ErrorResponse(message = e.message))
     }
+
     @ExceptionHandler(WriterNotMatchedException::class)
     fun handleWriterNotMatchedException(e: InvalidCredentialException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.UNAUTHORIZED)
             .body(ErrorResponse(message = e.message))
+    }
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFoundException(e: UserNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ErrorResponse(e.message))
     }
 }

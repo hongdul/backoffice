@@ -1,13 +1,13 @@
 package com.example.backoffice.domain.user.controller
 
-import com.example.backoffice.domain.user.dto.UserDto
-import com.example.backoffice.domain.user.dto.UserLoginRequest
-import com.example.backoffice.domain.user.dto.UserLoginResponse
-import com.example.backoffice.domain.user.dto.UserSignUpRequest
+import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.service.UserService
+import com.example.backoffice.infra.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -29,5 +29,16 @@ class UserController(val userService: UserService) {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(userService.login(userLoginRequest))
+    }
+
+    @Operation(summary = "사용자 프로필 수정")
+    @PostMapping("/user/info")
+    fun userInfo(
+        @AuthenticationPrincipal user: UserPrincipal,
+        @RequestBody userProfileRequest: UserProfileRequest
+    ): ResponseEntity<UserProfileResponse> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(userService.userInfo(user, userProfileRequest))
     }
 }

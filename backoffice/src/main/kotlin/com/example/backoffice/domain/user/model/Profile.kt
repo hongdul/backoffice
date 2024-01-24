@@ -8,20 +8,27 @@ import org.hibernate.type.descriptor.jdbc.VarcharJdbcType
 @Table(name = "profile")
 class Profile(
     @Column(name = "nickname")
-    val nickName: String,
+    var nickName: String,
 
     @Column(name = "address")
-    val address: String,
+    var address: String,
 
     @Column(name = "phone")
-    val phoneNumber: VarcharJdbcType,
+    var phoneNumber: VarcharJdbcType,
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
-    val user: User
+    var user: User
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+    fun updateProfile(profile: Profile) {
+        this.nickName = profile.nickName
+        this.address = profile.address
+        this.phoneNumber = profile.phoneNumber
+        this.user = profile.user
+
+    }
 }
