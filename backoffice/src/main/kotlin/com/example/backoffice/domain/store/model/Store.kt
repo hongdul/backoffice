@@ -1,5 +1,7 @@
 package com.example.backoffice.domain.store.model
 
+import com.example.backoffice.domain.menu.model.Menu
+import com.example.backoffice.domain.user.model.User
 import jakarta.persistence.*
 
 @Entity
@@ -22,9 +24,15 @@ class Store(
     @Column(name = "status", nullable = false)
     var status: StoreStatus,
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "userId", nullable = false)
-//    val user = User,
+    @Column(name = "description", nullable = false)
+    var description: String,
 
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    val menus: List<Menu> = emptyList(),
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    val user: User,
 ) {
+
 }
