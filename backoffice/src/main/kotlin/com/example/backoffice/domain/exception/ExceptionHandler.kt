@@ -42,4 +42,11 @@ class ExceptionHandler {
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
+
+    @ExceptionHandler(ProfileNotFoundException::class)
+    fun handleProfileNotFoundException(e: ProfileNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ErrorResponse(e.message))
+    }
 }
