@@ -24,11 +24,4 @@ class Profile(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-    fun updateProfile(profile: Profile) {
-        this.nickName = profile.nickName
-        this.address = profile.address
-        this.phoneNumber = profile.phoneNumber
-        this.user = profile.user
-
-    }
 }
