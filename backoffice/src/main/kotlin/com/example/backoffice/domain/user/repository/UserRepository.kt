@@ -4,7 +4,8 @@ import com.example.backoffice.domain.user.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository: JpaRepository<User, Long> {
-    fun findByEmail(email: String): User?
+  
+    fun existsByEmail(email: String): Boolean // 이메일 중복 검사
 
-    fun existsByEmail(email: String): Boolean
+    fun findByEmail(email: String): User?
 }

@@ -16,8 +16,7 @@ data class UserDto(
                 id = user.id,
                 nickname = user.nickname,
                 email = user.email,
-                role = user.role,
-                token = token,
+                role = user.role
             )
         }
     }

@@ -1,8 +1,6 @@
 package com.example.backoffice.domain.user.controller
 
-import com.example.backoffice.domain.user.dto.LoginRequest
-import com.example.backoffice.domain.user.dto.UserDto
-import com.example.backoffice.domain.user.dto.UserSignUpRequest
+import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.service.UserService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
@@ -29,10 +27,9 @@ class UserController(
 
     @Operation(summary = "로그인")
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<UserDto> {
-
+    fun login(@RequestBody userLoginRequest: UserLoginRequest): ResponseEntity<UserLoginResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userService.login(loginRequest))
+            .body(userService.login(userLoginRequest))
     }
 }
