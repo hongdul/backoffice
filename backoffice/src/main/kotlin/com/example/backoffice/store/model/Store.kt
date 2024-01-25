@@ -1,5 +1,6 @@
 package com.example.backoffice.store.model
 
+import com.example.backoffice.menu.model.Menu
 import com.example.backoffice.store.dto.StoreResponse
 import jakarta.persistence.*
 
@@ -22,9 +23,9 @@ class Store (
     @Column(name = "status")
     var status : StoreStatus,
 
-//    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
-//    var menus : MutableList<Menu> = mutableListOf(),
-//
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    var menu : MutableList<Menu> = mutableListOf(),
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id", nullable = false)
 //    val user : User
