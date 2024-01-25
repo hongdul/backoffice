@@ -15,8 +15,6 @@ class User(
     @Column(name = "password", nullable = false)
     val password: String,
 
-    @Column(name = "nickname", nullable = false)
-    val nickname: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)

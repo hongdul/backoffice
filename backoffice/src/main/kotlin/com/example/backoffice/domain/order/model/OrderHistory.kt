@@ -10,7 +10,6 @@ class OrderHistory(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-
     @ManyToOne
     val user: User
 

@@ -41,7 +41,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta") // 추가!
     kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta") // 추가!
-//    implementation("com.h2database:h2")
+    implementation("com.h2database:h2")
 
 
     runtimeOnly("org.postgresql:postgresql")

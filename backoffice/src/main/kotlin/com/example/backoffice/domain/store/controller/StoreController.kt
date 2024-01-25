@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/stores")
@@ -25,11 +26,10 @@ class StoreController(
     @Operation(summary = "가게 등록")
     @PostMapping
     fun createStore(
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestBody createStoreArguments: CreateStoreArguments,
-        authentication: Authentication
     ): ResponseEntity<StoreResponse> {
-        val userPrincipal = authentication.principal as UserPrincipal
-        val store = storeService.createStore(createStoreArguments, userPrincipal.to())
+        val store = storeService.createStore(createStoreArguments, user)
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
@@ -61,17 +61,21 @@ class StoreController(
     @PutMapping("/{storeId}")
     fun updateStore(
         @PathVariable storeId: Long,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestBody updateStoreArguments: UpdateStoreArguments
     ): ResponseEntity<StoreResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(storeService.updateStore(storeId, updateStoreArguments))
+            .body(storeService.updateStore(storeId, updateStoreArguments, user))
     }
 
     @Operation(summary = "가게 삭제")
     @DeleteMapping("/{storeId}")
-    fun deleteStore(@PathVariable storeId: Long): ResponseEntity<String> {
-        val storeName = storeService.deleteStore(storeId)
+    fun deleteStore(
+        @PathVariable storeId: Long,
+        @AuthenticationPrincipal user: UserPrincipal
+    ): ResponseEntity<String> {
+        val storeName = storeService.deleteStore(storeId, user)
 
         return ResponseEntity
             .status(HttpStatus.OK)
