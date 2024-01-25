@@ -2,14 +2,17 @@ package com.example.backoffice.domain.user.service
 
 import com.example.backoffice.domain.exception.InvalidCredentialException
 import com.example.backoffice.domain.exception.ProfileNotFoundException
+import com.example.backoffice.domain.exception.UserNotFoundException
 import com.example.backoffice.domain.exception.WriterNotMatchedException
 import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.model.User
 import com.example.backoffice.domain.user.repository.ProfileRepository
 import com.example.backoffice.domain.user.repository.UserRepository
+import com.example.backoffice.infra.security.UserPrincipal
 import com.example.backoffice.infra.security.jwt.JwtPlugin
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -59,22 +62,27 @@ class UserServiceImpl(
     }
 
     @Transactional
-    override fun createInfo(userInfoRequest: UserInfoRequest): ProfileDto {
-        val saveInfo = profileRepository.save(userInfoRequest.to())
+    @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
+    override fun createInfo(userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto {
+        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
+        val saveInfo = profileRepository.save(userInfoRequest.to(users))
         return ProfileDto.from(saveInfo)
 
     }
 
     @Transactional
-    override fun updateInfo(profileId: Long, userInfoRequest: UserInfoRequest): ProfileDto {
+    @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
+    override fun updateInfo(profileId: Long, userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto {
+        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
         val profiles =
-            profileRepository.findByIdOrNull(profileId) ?: throw ProfileNotFoundException("profile", profileId)
+            profileRepository.findByIdAndUser(profileId, users) ?: throw ProfileNotFoundException("profile", profileId)
         profiles.changeInfo(userInfoRequest)
         return ProfileDto.from(profileRepository.save(profiles))
 
     }
 
     @Transactional
+    @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
     override fun getInfo(profileId: Long): ProfileDto {
         val profiles =
             profileRepository.findByIdOrNull(profileId) ?: throw ProfileNotFoundException("profile", profileId)

@@ -4,10 +4,12 @@ import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.model.Profile
 import com.example.backoffice.domain.user.repository.ProfileRepository
 import com.example.backoffice.domain.user.service.UserService
+import com.example.backoffice.infra.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.http.RequestEntity
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -41,29 +43,30 @@ class UserController(
     }
 
     @Operation(summary = "사용자 정보 생성")
-    @PostMapping("/user/{profileId}")
+    @PostMapping
     fun createInfo(
-        @PathVariable profileId: Long,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestBody userInfoRequest: UserInfoRequest
     ): ResponseEntity<ProfileDto> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(userService.createInfo(userInfoRequest))
+            .body(userService.createInfo(userInfoRequest, user))
     }
 
     @Operation(summary = "사용자 정보 수정")
-    @PatchMapping("/user/{profileId}")
+    @PatchMapping("/{profileId}")
     fun updateInfo(
         @PathVariable profileId: Long,
+        @AuthenticationPrincipal user: UserPrincipal,
         @RequestBody userInfoRequest: UserInfoRequest
     ): ResponseEntity<ProfileDto> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userService.updateInfo(profileId, userInfoRequest))
+            .body(userService.updateInfo(profileId, userInfoRequest, user))
     }
 
     @Operation(summary = "사용자 정보 조회")
-    @GetMapping("/user/{profileId}")
+    @GetMapping("/{profileId}")
     fun getInfo(
         @PathVariable profileId: Long
     ): ResponseEntity<ProfileDto> {
