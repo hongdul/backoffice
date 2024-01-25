@@ -6,6 +6,7 @@ import com.example.backoffice.domain.exception.UserNotFoundException
 import com.example.backoffice.domain.exception.WriterNotMatchedException
 import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.model.QProfile.profile
+import com.example.backoffice.domain.user.model.QUser.user
 import com.example.backoffice.domain.user.model.User
 import com.example.backoffice.domain.user.repository.ProfileRepository
 import com.example.backoffice.domain.user.repository.UserRepository
@@ -85,10 +86,9 @@ class UserServiceImpl(
 
     @Transactional
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
-    override fun getInfo(profileId: Long): ProfileDto {
+    override fun getInfo(userId: Long): ProfileDto {
         val profiles =
-            profileRepository.findByIdOrNull(profileId) ?: throw ProfileNotFoundException("profile", profileId)
+            profileRepository.findByUser_Id(userId) ?: throw ProfileNotFoundException("profile", userId)
         return ProfileDto.from(profiles)
     }
-
 }
