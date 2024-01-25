@@ -31,14 +31,12 @@ class JwtAuthenticationFilter(
             jwtPlugin.validateToken(jwt)
                 .onSuccess {
                     val userId = it.payload.subject.toLong()
-                    val nickname = it.payload.get("nickname", String::class.java)
                     val role = it.payload.get("role", String::class.java)
                     val email = it.payload.get("email", String::class.java)
 
                     val principal = UserPrincipal(
                         id = userId,
                         email = email,
-                        nickname = nickname,
                         roles = setOf(role)
                     )
                     // Authentication 구현체 생성
