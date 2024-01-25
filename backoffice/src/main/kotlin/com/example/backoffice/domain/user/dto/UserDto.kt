@@ -5,16 +5,13 @@ import com.example.backoffice.domain.user.model.UserRole
 
 data class UserDto(
     val id: Long?,
-    val nickname: String,
     val email: String,
     val role: UserRole,
-    val token: String? = null,
 ) {
     companion object {
-        fun from(user: User, token: String?): UserDto {
+        fun from(user: User): UserDto {
             return UserDto(
                 id = user.id,
-                nickname = user.nickname,
                 email = user.email,
                 role = user.role
             )

@@ -1,6 +1,7 @@
 package com.example.backoffice.domain.menu.model
 
 import com.example.backoffice.domain.menu.dto.MenuResponse
+import com.example.backoffice.domain.review.model.Review
 import com.example.backoffice.domain.store.model.Store
 import jakarta.persistence.*
 
@@ -28,8 +29,8 @@ class Menu(
     @JoinColumn(name = "storeId", nullable = false)
     val store: Store,
 
-//    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
-//    val reviews = MutableList<Review> = mutableListOf()
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    val reviews: MutableList<Review> = mutableListOf()
 
 ) {
 
