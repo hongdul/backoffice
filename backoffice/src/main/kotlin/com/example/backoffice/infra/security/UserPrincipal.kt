@@ -14,13 +14,4 @@ data class UserPrincipal(
         id,
         email,
         roles.map { SimpleGrantedAuthority("ROLE_$it") })
-
-    fun to(): User {
-        return User(
-            id = id,
-            email = email,
-            password = "",
-            role = UserRole.CUSTOMER
-        )
-    }
 }

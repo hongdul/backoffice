@@ -4,4 +4,5 @@ import com.example.backoffice.domain.review.model.Review
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface ReviewRepository: JpaRepository<Review, Long> {
+    fun findByIdAndIdAndId(reviewId: Long, menuId: Long, userId: Long): Review?
 }

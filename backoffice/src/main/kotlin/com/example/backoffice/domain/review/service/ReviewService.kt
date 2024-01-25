@@ -1,14 +1,18 @@
 package com.example.backoffice.domain.review.service
 
-import com.example.backoffice.domain.review.dto.CreateReviewArguments
-import com.example.backoffice.domain.review.dto.DeleteReviewArguments
+import com.example.backoffice.domain.review.dto.ReviewRequest
 import com.example.backoffice.domain.review.dto.ReviewDto
-import com.example.backoffice.domain.review.dto.UpdateReviewArguments
-import com.example.backoffice.domain.user.model.User
+import com.example.backoffice.infra.security.UserPrincipal
 
 interface ReviewService {
 
-    fun createReview(createReviewArguments: CreateReviewArguments, user: User): ReviewDto
-    fun updateReview(updateReviewArguments: UpdateReviewArguments, user: User): ReviewDto
-    fun deleteReview(deleteReviewArguments: DeleteReviewArguments, user: User)
+    fun createReview(menuId: Long, reviewRequest: ReviewRequest, user: UserPrincipal): ReviewDto
+    fun updateReview(
+        menuId: Long,
+        reviewId: Long,
+        reviewRequest: ReviewRequest,
+        user: UserPrincipal
+    ): ReviewDto
+
+    fun deleteReview(menuId: Long, reviewId: Long, user: UserPrincipal)
 }
