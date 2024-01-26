@@ -41,7 +41,7 @@ class ReviewServiceImpl(
         user: UserPrincipal
     ): ReviewDto {
         val reviews =
-            reviewRepository.findByIdAndIdAndId(reviewId, menuId, user.id)
+            reviewRepository.findByIdAndMenu_IdAndUser_Id(reviewId, menuId, user.id)
                 ?: throw MenuNotFoundException(reviewId)
         reviews.changeReview(reviewRequest)
         return ReviewDto.from(reviewRepository.save(reviews))
@@ -51,7 +51,7 @@ class ReviewServiceImpl(
     @PreAuthorize("hasRole('CUSTOMER')")
     override fun deleteReview(menuId: Long, reviewId: Long, user: UserPrincipal) {
         val reviews =
-            reviewRepository.findByIdAndIdAndId(reviewId, menuId, user.id)
+            reviewRepository.findByIdAndMenu_IdAndUser_Id(reviewId, menuId, user.id)
                 ?: throw MenuNotFoundException(reviewId)
         reviewRepository.delete(reviews)
     }
