@@ -10,7 +10,6 @@ import com.example.backoffice.domain.user.repository.ProfileRepository
 import com.example.backoffice.domain.user.repository.UserRepository
 import com.example.backoffice.infra.security.UserPrincipal
 import com.example.backoffice.infra.security.jwt.JwtPlugin
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.crypto.password.PasswordEncoder
