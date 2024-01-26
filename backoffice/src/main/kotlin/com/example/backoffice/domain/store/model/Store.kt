@@ -19,7 +19,7 @@ class Store(
     @Column(name = "phone", nullable = false)
     var phone: String,
 
-    @Column(name = "addres", nullable = false)
+    @Column(name = "address", nullable = false)
     var address: String,
 
     @Column(name = "status", nullable = false)
