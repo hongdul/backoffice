@@ -2,26 +2,24 @@ package com.example.backoffice.domain.order.model
 
 import com.example.backoffice.domain.menu.model.Menu
 import com.example.backoffice.domain.user.model.User
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToOne
+import com.fasterxml.jackson.annotation.JsonIgnore
+import jakarta.persistence.*
 
 @Entity
+@Table(name = "cart")
 class Cart(
-    @Id
-    @GeneratedValue
-    val id: Long? = null,
-
     @ManyToOne
     @JoinColumn(name = "menuId", nullable = false)
     val menu: Menu,
 
-    @OneToOne
-    @JoinColumn(name = "userId", nullable = false)
-    val user: User
-) {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    val user: User,
 
+    @Column
+    val count: Int
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 }

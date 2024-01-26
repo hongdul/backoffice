@@ -87,7 +87,7 @@ class UserServiceImpl(
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
     override fun getInfo(userId: Long): ProfileDto {
         val profiles =
-            profileRepository.findByUser_Id(userId) ?: throw ProfileNotFoundException("profile", userId)
+            profileRepository.findByUserId(userId) ?: throw ProfileNotFoundException("profile", userId)
         return ProfileDto.from(profiles)
     }
 }

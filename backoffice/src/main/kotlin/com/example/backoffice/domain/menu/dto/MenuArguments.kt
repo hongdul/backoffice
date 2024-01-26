@@ -9,13 +9,13 @@ data class MenuArguments(
     val description: String,
     val price: Long
 ) {
-        fun to(store: Store): Menu {
-            return Menu(
-                name = this.name,
-                description = this.description,
-                price = this.price,
-                store = store,
-                status = MenuStatus.FORSALE
-            )
+    fun to(store: Store): Menu {
+        return Menu(
+            name = this.name,
+            description = this.description,
+            price = this.price,
+            store = store,
+            status = MenuStatus.FORSALE
+        )
     }
 }

@@ -49,4 +49,11 @@ class ExceptionHandler {
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
+
+    @ExceptionHandler(CartNotFoundException::class)
+    fun handleCartNotFoundException(e: CartNotFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ErrorResponse(e.message))
+    }
 }

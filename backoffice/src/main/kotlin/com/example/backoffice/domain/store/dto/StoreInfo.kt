@@ -1,7 +1,6 @@
 package com.example.backoffice.domain.store.dto
 
 import com.example.backoffice.domain.menu.dto.MenuResponse
-import com.example.backoffice.domain.menu.model.Menu
 import com.example.backoffice.domain.store.model.Store
 import com.example.backoffice.domain.store.model.StoreStatus
 
