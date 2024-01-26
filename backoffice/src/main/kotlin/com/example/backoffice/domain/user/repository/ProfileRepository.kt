@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ProfileRepository : JpaRepository<Profile, Long> {
     fun findByIdAndUser(profileId: Long, user: User): Profile?
+    fun findByUser(user: User): Profile?
+    fun findByUser_Id(userId: Long): Profile?
 }

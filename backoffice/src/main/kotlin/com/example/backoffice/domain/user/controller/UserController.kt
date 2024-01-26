@@ -2,6 +2,7 @@ package com.example.backoffice.domain.user.controller
 
 import com.example.backoffice.domain.user.dto.*
 import com.example.backoffice.domain.user.model.Profile
+import com.example.backoffice.domain.user.model.QUser.user
 import com.example.backoffice.domain.user.repository.ProfileRepository
 import com.example.backoffice.domain.user.service.UserService
 import com.example.backoffice.infra.security.UserPrincipal
@@ -66,13 +67,13 @@ class UserController(
     }
 
     @Operation(summary = "사용자 정보 조회")
-    @GetMapping("/{profileId}")
+    @GetMapping("/{userId}")
     fun getInfo(
-        @PathVariable profileId: Long
+        @PathVariable userId: Long
     ): ResponseEntity<ProfileDto> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userService.getInfo(profileId))
+            .body(userService.getInfo(userId))
     }
 
 }

@@ -8,5 +8,5 @@ interface UserService {
     fun login(userLoginRequest: UserLoginRequest): UserLoginResponse
     fun createInfo(userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto
     fun updateInfo(profileId: Long, userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto
-    fun getInfo(profileId: Long): ProfileDto
+    fun getInfo(userId: Long): ProfileDto
 }
