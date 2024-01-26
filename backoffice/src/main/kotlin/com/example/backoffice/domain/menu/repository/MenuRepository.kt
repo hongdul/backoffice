@@ -1,4 +1,8 @@
 package com.example.backoffice.domain.menu.repository
 
-interface MenuRepository {
+import com.example.backoffice.domain.menu.model.Menu
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface MenuRepository: JpaRepository<Menu, Long> {
+
 }
