@@ -7,6 +7,5 @@ data class CreateStoreRequest (
     val address : String,
     val phone : String,
     val status : StoreStatus,
-    val userid : Long?,
     val description : String
 )

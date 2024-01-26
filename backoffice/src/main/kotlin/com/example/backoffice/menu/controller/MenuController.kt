@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
+@RestController
 @RequestMapping("/stores/{storeId}/menus")
 class MenuController(
     private val menuService: MenuService
 ) {
-    fun getAllMenuList(): ResponseEntity<List<MenuResponse>> {
+    @GetMapping
+    fun getAllMenuList(@PathVariable storeId: String): ResponseEntity<List<MenuResponse>> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(menuService.getAllMenuList())

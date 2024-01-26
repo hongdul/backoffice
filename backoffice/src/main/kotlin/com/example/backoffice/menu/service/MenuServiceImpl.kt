@@ -7,10 +7,14 @@ import com.example.backoffice.menu.dto.UpdateMenuRequest
 import com.example.backoffice.menu.model.Menu
 import com.example.backoffice.menu.model.toResponse
 import com.example.backoffice.menu.repository.MenuRepository
+import com.example.backoffice.store.repository.StoreRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
 
+@Service
 class MenuServiceImpl(
-    private val menuRepository: MenuRepository
+    private val menuRepository: MenuRepository,
+    private val storeRepository: StoreRepository
 ) : MenuService
 {
     override fun getAllMenuList(): List<MenuResponse> {

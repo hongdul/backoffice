@@ -36,6 +36,7 @@ class StoreServiceImpl(
                 address = request.address,
                 phone = request.phone,
                 status = request.status,
+                // 여기에도 store 관련 내용을 저장하지 않았다.
                 description = request.description
             )
         ).toResponse()

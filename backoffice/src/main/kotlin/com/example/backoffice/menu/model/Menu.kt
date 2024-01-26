@@ -35,6 +35,6 @@ fun Menu.toResponse(): MenuResponse{
         description = description,
         status = status,
         price = price,
-        store = id,
+        storeId = store.id
     )
 }

@@ -7,7 +7,7 @@ data class StoreResponse(
     val address : String,
     val phone : String,
     val status : StoreStatus,
-    val userid : Long?,
+    val userid : Long,
     val description : String
 )
 

@@ -44,7 +44,10 @@ fun Store.toResponse() : StoreResponse{
         address = address,
         phone = phone,
         status = status,
-        userid = id,
+        userid = id!!,
         description = description
     )
 }
+
+// store와 user의 연관관계를 설정한다
+//
