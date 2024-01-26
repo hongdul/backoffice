@@ -1,7 +1,7 @@
 package com.example.backoffice.domain.menu.model
 
+import com.example.backoffice.domain.menu.dto.MenuArguments
 import com.example.backoffice.domain.menu.dto.MenuResponse
-import com.example.backoffice.domain.menu.dto.UpdateMenuArguments
 import com.example.backoffice.domain.review.model.Review
 import com.example.backoffice.domain.store.model.Store
 import jakarta.persistence.*
@@ -45,7 +45,7 @@ class Menu(
         } else { MenuStatus.FORSALE }
         return status.name
     }
-    fun updateBy(arguments: UpdateMenuArguments) {
+    fun updateBy(arguments: MenuArguments) {
         name = arguments.name
         description = arguments.description
         price = arguments.price

@@ -1,8 +1,8 @@
 package com.example.backoffice.domain.menu.controller
 
 import com.example.backoffice.domain.menu.dto.MenuResponse
-import com.example.backoffice.domain.menu.dto.RegisterMenuArguments
-import com.example.backoffice.domain.menu.dto.UpdateMenuArguments
+import com.example.backoffice.domain.menu.dto.MenuWithReviews
+import com.example.backoffice.domain.menu.dto.MenuArguments
 import com.example.backoffice.domain.menu.service.MenuService
 import com.example.backoffice.infra.security.UserPrincipal
 import io.swagger.v3.oas.annotations.Operation
@@ -28,7 +28,7 @@ class MenuController(
 
     @Operation(summary = "메뉴 상세 조회")
     @GetMapping("/{menuId}")
-    fun getMenuInfo(@PathVariable menuId: Long): ResponseEntity<MenuResponse> {
+    fun getMenuInfo(@PathVariable menuId: Long): ResponseEntity<MenuWithReviews> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(menuService.getMenuInfo(menuId))
@@ -36,7 +36,7 @@ class MenuController(
 
     @Operation(summary = "메뉴 등록")
     @PostMapping
-    fun registerMenu(arguments: RegisterMenuArguments,
+    fun registerMenu(arguments: MenuArguments,
                      @RequestParam(value = "storeId") storeId: Long,
                      @AuthenticationPrincipal user: UserPrincipal
     ): ResponseEntity<MenuResponse> {
@@ -48,7 +48,7 @@ class MenuController(
     @Operation(summary = "메뉴 수정하기")
     @PutMapping("/{menuId}")
     fun updateMenu(@PathVariable menuId: Long,
-                   arguments: UpdateMenuArguments,
+                   arguments: MenuArguments,
                    @AuthenticationPrincipal user: UserPrincipal
     ): ResponseEntity<MenuResponse> {
         return ResponseEntity

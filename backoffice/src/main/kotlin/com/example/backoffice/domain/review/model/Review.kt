@@ -34,9 +34,9 @@ class Review(
     @Column(name = "created_at")
     private var createdAt: LocalDateTime = LocalDateTime.now()
 
-    @Column(name = "updated_at")
+    @Column(name = "modified_at")
     @UpdateTimestamp // UPDATE 시 자동으로 값을 채워줌
-    private var updatedAt: LocalDateTime = LocalDateTime.now()
+    private var modifiedAt: LocalDateTime = LocalDateTime.now()
 
     fun changeReview(createReviewArguments: ReviewRequest) {
         this.rating = createReviewArguments.rating

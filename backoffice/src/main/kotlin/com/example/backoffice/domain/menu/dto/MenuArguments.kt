@@ -4,7 +4,7 @@ import com.example.backoffice.domain.menu.model.Menu
 import com.example.backoffice.domain.menu.model.MenuStatus
 import com.example.backoffice.domain.store.model.Store
 
-data class RegisterMenuArguments(
+data class MenuArguments(
     val name: String,
     val description: String,
     val price: Long

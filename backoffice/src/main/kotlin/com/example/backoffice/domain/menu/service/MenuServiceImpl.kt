@@ -4,8 +4,9 @@ import com.example.backoffice.domain.exception.MenuNotFoundException
 import com.example.backoffice.domain.exception.StoreNotFoundException
 import com.example.backoffice.domain.menu.dto.MenuResponse
 import com.example.backoffice.domain.menu.dto.MenuResponse.Companion.from
-import com.example.backoffice.domain.menu.dto.RegisterMenuArguments
-import com.example.backoffice.domain.menu.dto.UpdateMenuArguments
+import com.example.backoffice.domain.menu.dto.MenuWithReviews
+import com.example.backoffice.domain.menu.dto.MenuWithReviews.Companion.infoFrom
+import com.example.backoffice.domain.menu.dto.MenuArguments
 import com.example.backoffice.domain.menu.model.toResponse
 import com.example.backoffice.domain.menu.repository.MenuRepository
 import com.example.backoffice.domain.store.repository.StoreRepository
@@ -27,14 +28,14 @@ class MenuServiceImpl(
         return menus.map{ it.toResponse() }
     }
 
-    override fun getMenuInfo(menuId: Long): MenuResponse {
+    override fun getMenuInfo(menuId: Long): MenuWithReviews {
         val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
-        return from(foundMenu)
+        return infoFrom(foundMenu)
     }
 
     @PreAuthorize("hasRole('MANAGER')")
     @Transactional
-    override fun registerMenu(arguments: RegisterMenuArguments, storeId: Long, user: UserPrincipal): MenuResponse {
+    override fun registerMenu(arguments: MenuArguments, storeId: Long, user: UserPrincipal): MenuResponse {
         val foundStore = storeRepository.findByIdOrNull(storeId) ?: throw StoreNotFoundException(storeId)
         if (foundStore.user.id != user.id) throw Exception("no permission")
         return menuRepository.save(arguments.to(foundStore)).toResponse()
@@ -42,7 +43,7 @@ class MenuServiceImpl(
 
     @PreAuthorize("hasRole('MANAGER')")
     @Transactional
-    override fun updateMenu(arguments: UpdateMenuArguments, menuId: Long, user: UserPrincipal): MenuResponse {
+    override fun updateMenu(arguments: MenuArguments, menuId: Long, user: UserPrincipal): MenuResponse {
         val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
         foundMenu.checkAuthorization(user.id)
         foundMenu.updateBy(arguments)
