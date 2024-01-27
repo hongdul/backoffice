@@ -6,8 +6,8 @@ import org.hibernate.annotations.CreationTimestamp
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "orderhistory")
-class OrderHistory(
+@Table(name = "history")
+class History(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User,
@@ -19,4 +19,5 @@ class OrderHistory(
     @CreationTimestamp
     @Column(updatable = false)
     val orderedAt: ZonedDateTime = ZonedDateTime.now()
+
 }
