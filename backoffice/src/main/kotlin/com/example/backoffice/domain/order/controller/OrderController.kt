@@ -56,10 +56,12 @@ class OrderController(
     }
 
     @Operation(summary = "주문내역 조회", description = "주문했던 내역을 목록으로 조회합니다.")
-    @GetMapping
+    @GetMapping("/history")
     fun getOrderHistory(
         @AuthenticationPrincipal user: UserPrincipal
-    ): ResponseEntity<List<List<Pair<MenuArguments, Int>>>> {
-        return orderService.getOrderHistory(user)
+    ): ResponseEntity<List<List<OrderMapDto>>> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(orderService.getHistory(user))
     }
 }

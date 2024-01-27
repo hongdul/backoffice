@@ -24,7 +24,7 @@ class OrderServiceImpl(
     private val cartRepository: CartRepository,
     private val menuRepository: MenuRepository,
     private val userRepository: UserRepository,
-    private val orderHistoryRepository: OrderHistoryRepository,
+    private val historyRepository: HistoryRepository,
     private val orderMapRepository: OrderMapRepository
 ) : OrderService {
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
@@ -52,9 +52,9 @@ class OrderServiceImpl(
     @Transactional
     override fun order(user: UserPrincipal) {
         val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
-        val orderHistoryId = orderHistoryRepository.save(OrderHistory(users)).id!!
+        val historyId = historyRepository.save(History(users)).id!!
         // 주문내역 저장
-        val orderHistory = orderHistoryRepository.findByIdOrNull(orderHistoryId) ?: throw UserNotFoundException(
+        val orderHistory = historyRepository.findByIdOrNull(historyId) ?: throw UserNotFoundException(
             "user",
             user.id
         )
@@ -73,16 +73,17 @@ class OrderServiceImpl(
     }
 
     @Transactional
-    override fun getOrderHistory(user: UserPrincipal): List<List<Pair<MenuArguments, Int>>> {
-        val historyIdList = orderHistoryRepository.findAllByUserId(user.id) ?: throw Exception("orderHistory Not found")
+    override fun getHistory(user: UserPrincipal): MutableList<List<OrderMapDto>> {
+        val historyIdList = historyRepository.findAllByUserId(user.id)
+            ?: throw Exception("orderHistory Not found")
+        val orderHistoryList: MutableList<List<OrderMapDto>> = mutableListOf()
         for (l in historyIdList.indices) {
-            val (menuIdList, countList) = orderMapRepository.findAllByOrderHistoryId(historyIdList[l])
-                ?.let { orderMap ->
-                    Pair(orderMap.map { it.menu.id!! }, orderMap.map { it.count })
-                } ?: throw UserNotFoundException("user", user.id)
+            val orderHistory = historyIdList[l].id?.
+            let { orderMapRepository.findAllByHistoryId(it) }!!.
+            map{ it.toDto() }
+            orderHistoryList += orderHistory
         }
-
-
+        return orderHistoryList
     }
 
 }
