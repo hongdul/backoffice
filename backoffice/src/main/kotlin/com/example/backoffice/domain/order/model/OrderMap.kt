@@ -1,6 +1,7 @@
 package com.example.backoffice.domain.order.model
 
 import com.example.backoffice.domain.menu.model.Menu
+import com.example.backoffice.domain.order.dto.OrderMapDto
 import jakarta.persistence.*
 
 @Entity
@@ -20,4 +21,11 @@ class OrderMap(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
+}
+
+fun OrderMap.toDto(): OrderMapDto {
+    return OrderMapDto(
+        menuId = menu.id!!,
+        count = count
+    )
 }
