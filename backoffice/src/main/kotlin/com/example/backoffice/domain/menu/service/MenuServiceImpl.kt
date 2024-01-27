@@ -25,7 +25,7 @@ class MenuServiceImpl(
 
     override fun getMenus(storeId: Long): List<MenuResponse> {
         val menus = menuRepository.findAll().filter{ it.store.id == storeId }
-        return menus.map{ it.toResponse() }
+        return menus.map{ from(it) }
     }
 
     override fun getMenuInfo(menuId: Long): MenuWithReviews {
@@ -48,6 +48,7 @@ class MenuServiceImpl(
         foundMenu.checkAuthorization(user.id)
         foundMenu.updateBy(arguments)
         return from(foundMenu)
+        TODO("리팩토링 필요")
     }
 
     @PreAuthorize("hasRole('MANAGER')")

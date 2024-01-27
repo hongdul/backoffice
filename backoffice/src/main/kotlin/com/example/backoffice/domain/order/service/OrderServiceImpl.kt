@@ -62,14 +62,14 @@ class OrderServiceImpl(
     override fun order(user: UserPrincipal): String {
         val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
 
-        val orderHistory = historyRepository.save(History(users)).id
-            .let{ historyRepository.findByIdOrNull(it) ?: throw UserNotFoundException("user", user.id) }
-
         // cart repository 에서 메뉴 id, 메뉴 갯수 Pair 로 묶어 가져오기
         val (menuIdList, countList) = cartRepository.findAllByUserId(user.id)
             ?.let { carts ->
                 Pair(carts.map { it.menu.id!! }, carts.map { it.count })
-            } ?: throw UserNotFoundException("user", user.id)
+            } ?: throw UserNotFoundException("user", user.id) // 장바구니가 비어있습니다 출력해야함
+
+        val orderHistory = historyRepository.save(History(users)).id
+            .let{ historyRepository.findByIdOrNull(it) ?: throw UserNotFoundException("user", user.id) }
 
         // orderMap 에 저장
         for (l in menuIdList.indices) {
