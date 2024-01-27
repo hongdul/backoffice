@@ -10,6 +10,6 @@ interface OrderService {
     fun menuInCart(menuId: Long, user: UserPrincipal, cartRequest: CartRequest): CartDto
     fun getCart(user: UserPrincipal): List<CartDto>
     fun deleteCart(user: UserPrincipal): String
-    fun order(user: UserPrincipal)
+    fun order(user: UserPrincipal): String
     fun getHistory(user: UserPrincipal): List<List<OrderMapDto>>
 }

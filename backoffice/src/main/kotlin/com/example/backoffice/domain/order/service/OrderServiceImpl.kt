@@ -59,26 +59,27 @@ class OrderServiceImpl(
 
 
     @Transactional
-    override fun order(user: UserPrincipal) {
+    override fun order(user: UserPrincipal): String {
         val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
-        val historyId = historyRepository.save(History(users)).id!!
-        // 주문내역 저장
-        val orderHistory = historyRepository.findByIdOrNull(historyId) ?: throw UserNotFoundException(
-            "user",
-            user.id
-        )
+
+        val orderHistory = historyRepository.save(History(users)).id
+            .let{ historyRepository.findByIdOrNull(it) ?: throw UserNotFoundException("user", user.id) }
+
+        // cart repository 에서 메뉴 id, 메뉴 갯수 Pair 로 묶어 가져오기
         val (menuIdList, countList) = cartRepository.findAllByUserId(user.id)
             ?.let { carts ->
                 Pair(carts.map { it.menu.id!! }, carts.map { it.count })
             } ?: throw UserNotFoundException("user", user.id)
 
+        // orderMap 에 저장
         for (l in menuIdList.indices) {
             val menu = menuRepository.findByIdOrNull(menuIdList[l]) ?: throw MenuNotFoundException(menuIdList[l])
             orderMapRepository.save(OrderMap(menu, orderHistory, countList[l]))
         }
-        //orderMap 으로 보내기
-        cartRepository.deleteAllByUserId(user.id)
         // 삭제쿼리
+        cartRepository.deleteAllByUserId(user.id)
+
+        return "주문이 완료되었습니다."
     }
 
     @Transactional

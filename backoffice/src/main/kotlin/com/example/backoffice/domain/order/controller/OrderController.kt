@@ -61,8 +61,10 @@ class OrderController(
 
     @Operation(summary = "주문하기", description = "장바구니에 있는 메뉴를 주문합니다. ")
     @PutMapping("/order")
-    fun order(@AuthenticationPrincipal user: UserPrincipal) {
-        orderService.order(user)
+    fun order(@AuthenticationPrincipal user: UserPrincipal): ResponseEntity<String> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(orderService.order(user))
     }
 
     @Operation(summary = "주문내역 조회", description = "주문했던 내역을 목록으로 조회합니다.")
