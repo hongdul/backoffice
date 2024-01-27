@@ -66,14 +66,15 @@ class UserController(
             .body(userService.updateInfo(profileId, userInfoRequest, user))
     }
 
-    @Operation(summary = "사용자 정보 조회")
+    @Operation(summary = "사용자 정보 조회", description = "자신의 프로필 조회: 0 입력")
     @GetMapping("/{userId}")
     fun getInfo(
-        @PathVariable userId: Long
+        @PathVariable userId: Long,
+        @AuthenticationPrincipal user: UserPrincipal
     ): ResponseEntity<ProfileDto> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userService.getInfo(userId))
+            .body(userService.getInfo(userId, user))
     }
 
 }

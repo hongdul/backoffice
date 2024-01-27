@@ -70,6 +70,7 @@ class UserServiceImpl(
         return existProfile?.let {
             throw UserNotFoundException("중복됨.", user.id)
         } ?: ProfileDto.from(profileRepository.save(userInfoRequest.to(users)))
+        TODO("리팩토링")
     }
 
     @Transactional
@@ -85,9 +86,10 @@ class UserServiceImpl(
 
     @Transactional
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
-    override fun getInfo(userId: Long): ProfileDto {
+    override fun getInfo(userId: Long, user: UserPrincipal): ProfileDto {
+        val profileId = if(userId == 0L) user.id else userId
         val profiles =
-            profileRepository.findByUserId(userId) ?: throw ProfileNotFoundException("profile", userId)
+            profileRepository.findByUserId(profileId) ?: throw ProfileNotFoundException("profile", profileId)
         return ProfileDto.from(profiles)
     }
 }
