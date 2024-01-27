@@ -11,8 +11,8 @@ class OrderMap(
     val menu: Menu,
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderhistory_id", nullable = false)
-    val order: OrderHistory,
+    @JoinColumn(name = "history_id", nullable = false)
+    val history: History,
 
     @Column(name = "count", nullable = false)
     val count: Int
