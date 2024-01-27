@@ -2,15 +2,16 @@ package com.example.backoffice.domain.order.service
 
 import com.example.backoffice.domain.exception.MenuNotFoundException
 import com.example.backoffice.domain.exception.UserNotFoundException
-import com.example.backoffice.domain.menu.dto.MenuArguments
 import com.example.backoffice.domain.menu.repository.MenuRepository
 import com.example.backoffice.domain.order.dto.CartDto
 import com.example.backoffice.domain.order.dto.CartRequest
+import com.example.backoffice.domain.order.dto.OrderMapDto
 import com.example.backoffice.domain.order.model.Cart
-import com.example.backoffice.domain.order.model.OrderHistory
+import com.example.backoffice.domain.order.model.History
 import com.example.backoffice.domain.order.model.OrderMap
+import com.example.backoffice.domain.order.model.toDto
 import com.example.backoffice.domain.order.repository.CartRepository
-import com.example.backoffice.domain.order.repository.OrderHistoryRepository
+import com.example.backoffice.domain.order.repository.HistoryRepository
 import com.example.backoffice.domain.order.repository.OrderMapRepository
 import com.example.backoffice.domain.user.repository.UserRepository
 import com.example.backoffice.infra.security.UserPrincipal
@@ -48,6 +49,14 @@ class OrderServiceImpl(
         val cart = cartRepository.findAllByUserId(user.id) ?: throw UserNotFoundException("user", user.id)
         return cart.map { CartDto.from(it) }
     }
+
+    @Transactional
+    @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
+    override fun deleteCart(user: UserPrincipal): String {
+        cartRepository.deleteAllByUserId(user.id)
+        return "장바구니를 비웠습니다."
+    }
+
 
     @Transactional
     override fun order(user: UserPrincipal) {

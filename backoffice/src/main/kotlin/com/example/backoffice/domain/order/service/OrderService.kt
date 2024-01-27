@@ -9,6 +9,7 @@ import com.example.backoffice.infra.security.UserPrincipal
 interface OrderService {
     fun menuInCart(menuId: Long, user: UserPrincipal, cartRequest: CartRequest): CartDto
     fun getCart(user: UserPrincipal): List<CartDto>
+    fun deleteCart(user: UserPrincipal): String
     fun order(user: UserPrincipal)
     fun getHistory(user: UserPrincipal): List<List<OrderMapDto>>
 }
