@@ -47,7 +47,6 @@ class MenuServiceImpl(
         foundMenu.checkAuthorization(user.id)
         foundMenu.updateBy(arguments)
         return from(foundMenu)
-        TODO("리팩토링 필요")
     }
 
     @PreAuthorize("hasRole('MANAGER')")
