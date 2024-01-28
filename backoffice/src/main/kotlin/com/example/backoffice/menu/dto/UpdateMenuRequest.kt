@@ -7,5 +7,4 @@ data class UpdateMenuRequest(
     val description : String,
     val status : MenuStatus,
     val price : Long,
-    val store : Long?,
 )

@@ -4,28 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b32f2806-77dc-45ef-a829-f404f2299106" name="Changes" comment="Feat&#10;StoreEntity, StoreServiceImpl 작성">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/backoffice.backoffice.main~2.iml" beforeDir="false" />
+    <list default="true" id="b32f2806-77dc-45ef-a829-f404f2299106" name="Changes" comment="Feat crud swagger를 통해 구현 여부 확인완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/controller/MenuController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/controller/MenuController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/CreateMenuRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/CreateMenuRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/model/Menu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/model/Menu.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/CreateStoreRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/CreateStoreRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/StoreResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/StoreResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/UpdateStoreRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/dto/UpdateStoreRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/model/Store.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/model/Store.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/store/service/StoreServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/UpdateMenuRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/UpdateMenuRequest.kt" afterDir="false" />
     </list>
     <list id="92784574-7744-4687-b848-d3a82edde9a9" name="geonwookim 님이 변경한 내용" comment="">
       <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/MenuResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/MenuResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/UpdateMenuRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/dto/UpdateMenuRequest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/model/Menu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/model/Menu.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" afterDir="false" />
     </list>
     <list id="0cf116c2-b77b-442b-b7c2-9f81fa62d2d3" name="hyeonseok 님이 변경한 내용" comment="">
       <change beforePath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt" afterDir="false" />
@@ -69,31 +54,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev-entity" />
+        <entry key="$PROJECT_DIR$" value="JJY" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/service/MenuServiceImpl.kt">
-      <ranges>
-        <range start1="9" end1="9" start2="9" end2="10" changelist="b32f2806-77dc-45ef-a829-f404f2299106" />
-        <range start1="10" end1="10" start2="11" end2="12" changelist="b32f2806-77dc-45ef-a829-f404f2299106" />
-        <range start1="11" end1="11" start2="13" end2="14" changelist="b32f2806-77dc-45ef-a829-f404f2299106" />
-        <range start1="12" end1="13" start2="15" end2="17" changelist="b32f2806-77dc-45ef-a829-f404f2299106" />
-        <range start1="26" end1="27" start2="30" end2="33" changelist="92784574-7744-4687-b848-d3a82edde9a9" />
-        <range start1="32" end1="33" start2="38" end2="39" changelist="0cf116c2-b77b-442b-b7c2-9f81fa62d2d3" />
-        <range start1="34" end1="35" start2="40" end2="41" changelist="92784574-7744-4687-b848-d3a82edde9a9" />
-        <range start1="40" end1="41" start2="46" end2="47" changelist="0cf116c2-b77b-442b-b7c2-9f81fa62d2d3" />
-        <range start1="45" end1="46" start2="51" end2="51" changelist="0cf116c2-b77b-442b-b7c2-9f81fa62d2d3" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/backoffice/src/main/kotlin/com/example/backoffice/menu/model/Menu.kt">
-      <ranges>
-        <range start1="31" end1="32" start2="31" end2="32" changelist="92784574-7744-4687-b848-d3a82edde9a9" />
-        <range start1="37" end1="38" start2="37" end2="38" changelist="b32f2806-77dc-45ef-a829-f404f2299106" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -164,8 +128,19 @@
       <workItem from="1705979397646" duration="1183000" />
       <workItem from="1706060003740" duration="7306000" />
       <workItem from="1706159899809" duration="7529000" />
-      <workItem from="1706234684836" duration="10512000" />
+      <workItem from="1706234684836" duration="11103000" />
+      <workItem from="1706268742159" duration="1797000" />
+      <workItem from="1706451401053" duration="1466000" />
     </task>
+    <task id="LOCAL-00001" summary="Feat crud swagger를 통해 구현 여부 확인완료">
+      <option name="closed" value="true" />
+      <created>1706267950402</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706267950402</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +157,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev-entity" />
+                        <option value="JJY" />
                       </list>
                     </value>
                   </entry>
@@ -198,5 +173,7 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+    <MESSAGE value="Feat crud swagger를 통해 구현 여부 확인완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat crud swagger를 통해 구현 여부 확인완료" />
   </component>
 </project>
