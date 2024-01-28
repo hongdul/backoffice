@@ -8,20 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ExceptionHandler {
 
-    @ExceptionHandler(StoreNotFoundException::class)
-    fun handleStoreNotFoundException(e: StoreNotFoundException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity
-            .status(HttpStatus.NOT_FOUND)
-            .body(ErrorResponse(e.message))
-    }
-
-    @ExceptionHandler(MenuNotFoundException::class)
-    fun handleMenuNotFoundException(e: MenuNotFoundException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity
-            .status(HttpStatus.NOT_FOUND)
-            .body(ErrorResponse(e.message))
-    }
-
     @ExceptionHandler(InvalidCredentialException::class)
     fun handleInvalidCredentialException(e: InvalidCredentialException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
@@ -29,29 +15,22 @@ class ExceptionHandler {
             .body(ErrorResponse(message = e.message))
     }
 
-    @ExceptionHandler(WriterNotMatchedException::class)
-    fun handleWriterNotMatchedException(e: InvalidCredentialException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity
-            .status(HttpStatus.UNAUTHORIZED)
-            .body(ErrorResponse(message = e.message))
-    }
-
-    @ExceptionHandler(UserNotFoundException::class)
-    fun handleUserNotFoundException(e: UserNotFoundException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(OnlyModelNotFoundException::class)
+    fun handleOnlyModelNotFoundException(e: OnlyModelNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
 
-    @ExceptionHandler(ProfileNotFoundException::class)
-    fun handleProfileNotFoundException(e: ProfileNotFoundException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(ModelNotFoundException::class)
+    fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
 
-    @ExceptionHandler(CartNotFoundException::class)
-    fun handleCartNotFoundException(e: CartNotFoundException): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(ModelAlreadyExistsException::class)
+    fun handleModelAlreadyExistsException(e: ModelAlreadyExistsException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))

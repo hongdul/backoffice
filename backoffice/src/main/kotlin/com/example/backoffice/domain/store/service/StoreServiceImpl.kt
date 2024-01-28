@@ -1,7 +1,6 @@
 package com.example.backoffice.domain.store.service
 
-import com.example.backoffice.domain.exception.StoreNotFoundException
-import com.example.backoffice.domain.exception.UserNotFoundException
+import com.example.backoffice.domain.exception.ModelNotFoundException
 import com.example.backoffice.domain.store.dto.CreateStoreArguments
 import com.example.backoffice.domain.store.dto.StoreInfo
 import com.example.backoffice.domain.store.dto.StoreResponse
@@ -33,7 +32,7 @@ class StoreServiceImpl(
     @PreAuthorize("hasAnyRole('MANAGER', 'CUSTOMER')")
     override fun getStoreById(storeId: Long): StoreInfo {
         val foundStore = storeRepository.findByIdOrNull(storeId)
-            ?: throw StoreNotFoundException(storeId)
+            ?: throw ModelNotFoundException("store", storeId)
 
         return foundStore.let { StoreInfo.from(it) }
     }
@@ -41,7 +40,7 @@ class StoreServiceImpl(
     @Transactional
     @PreAuthorize("hasRole('MANAGER')")
     override fun createStore(createStoreArguments: CreateStoreArguments, user: UserPrincipal): StoreResponse {
-        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
+        val users = userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
         val createdStore = storeRepository.save(createStoreArguments.to(users))
 
         return from(createdStore)
@@ -56,8 +55,8 @@ class StoreServiceImpl(
     ): StoreResponse {
         val stores = storeRepository.findByIdAndUser(
             storeId,
-            userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
-        ) ?: throw StoreNotFoundException(storeId)
+            userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
+        ) ?: throw ModelNotFoundException("store", storeId)
         stores.changeStore(updateStoreArguments)
         val updatedStore = storeRepository.save(stores)
         return from(updatedStore)
@@ -66,9 +65,9 @@ class StoreServiceImpl(
     @Transactional
     @PreAuthorize("hasRole('MANAGER')")
     override fun deleteStore(storeId: Long, user: UserPrincipal): String {
-        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
-        val stores = storeRepository.findByIdAndUser(storeId, users) ?: throw StoreNotFoundException(storeId)
+        val users = userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
+        val stores = storeRepository.findByIdAndUser(storeId, users) ?: throw ModelNotFoundException("store", storeId)
         storeRepository.delete(stores)
-        return ""
+        return "가게가 삭제처리 되었습니다."
     }
 }

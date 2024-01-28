@@ -43,7 +43,7 @@ class JwtAuthenticationFilter(
                     val authentication = JwtAuthenticationToken(
                         principal = principal,
                         // request로 부터 요청 상세정보 생성
-                        details =  WebAuthenticationDetailsSource().buildDetails(request)
+                        details = WebAuthenticationDetailsSource().buildDetails(request)
                     )
                     // SecurityContext에 authentication 객체 저장
                     SecurityContextHolder.getContext().authentication = authentication

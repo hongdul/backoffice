@@ -1,7 +1,6 @@
 package com.example.backoffice.domain.menu.service
 
-import com.example.backoffice.domain.exception.MenuNotFoundException
-import com.example.backoffice.domain.exception.StoreNotFoundException
+import com.example.backoffice.domain.exception.ModelNotFoundException
 import com.example.backoffice.domain.menu.dto.MenuResponse
 import com.example.backoffice.domain.menu.dto.MenuResponse.Companion.from
 import com.example.backoffice.domain.menu.dto.MenuWithReviews
@@ -29,14 +28,14 @@ class MenuServiceImpl(
     }
 
     override fun getMenuInfo(menuId: Long): MenuWithReviews {
-        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
+        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw ModelNotFoundException("menu", menuId)
         return infoFrom(foundMenu)
     }
 
     @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     override fun registerMenu(arguments: MenuArguments, storeId: Long, user: UserPrincipal): MenuResponse {
-        val foundStore = storeRepository.findByIdOrNull(storeId) ?: throw StoreNotFoundException(storeId)
+        val foundStore = storeRepository.findByIdOrNull(storeId) ?: throw ModelNotFoundException("store", storeId)
         if (foundStore.user.id != user.id) throw Exception("no permission")
         return menuRepository.save(arguments.to(foundStore)).toResponse()
     }
@@ -44,7 +43,7 @@ class MenuServiceImpl(
     @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     override fun updateMenu(arguments: MenuArguments, menuId: Long, user: UserPrincipal): MenuResponse {
-        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
+        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw ModelNotFoundException("menu", menuId)
         foundMenu.checkAuthorization(user.id)
         foundMenu.updateBy(arguments)
         return from(foundMenu)
@@ -54,7 +53,7 @@ class MenuServiceImpl(
     @PreAuthorize("hasRole('MANAGER')")
     @Transactional
     override fun deleteMenu(menuId: Long, user: UserPrincipal): String {
-        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
+        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw ModelNotFoundException("menu", menuId)
         foundMenu.checkAuthorization(user.id)
         val name = foundMenu.name
         menuRepository.delete(foundMenu)
@@ -62,7 +61,7 @@ class MenuServiceImpl(
     }
 
     override fun changeMenuStatus(menuId: Long, user: UserPrincipal): String {
-        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
+        val foundMenu = menuRepository.findByIdOrNull(menuId) ?: throw ModelNotFoundException("menu", menuId)
         foundMenu.checkAuthorization(user.id)
         val status = foundMenu.toggleStatus()
         return "${foundMenu.name}의 상태가 $status 로 변경되었습니다."

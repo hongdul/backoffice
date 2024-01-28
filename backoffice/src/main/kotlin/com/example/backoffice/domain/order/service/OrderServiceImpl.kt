@@ -1,7 +1,7 @@
 package com.example.backoffice.domain.order.service
 
-import com.example.backoffice.domain.exception.MenuNotFoundException
-import com.example.backoffice.domain.exception.UserNotFoundException
+import com.example.backoffice.domain.exception.ModelNotFoundException
+import com.example.backoffice.domain.exception.OnlyModelNotFoundException
 import com.example.backoffice.domain.menu.repository.MenuRepository
 import com.example.backoffice.domain.order.dto.CartDto
 import com.example.backoffice.domain.order.dto.CartRequest
@@ -31,8 +31,14 @@ class OrderServiceImpl(
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
     @Transactional
     override fun menuInCart(menuId: Long, user: UserPrincipal, cartRequest: CartRequest): CartDto {
-        val menus = menuRepository.findByIdOrNull(menuId) ?: throw MenuNotFoundException(menuId)
-        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
+        val menus = menuRepository.findByIdOrNull(menuId) ?: throw ModelNotFoundException("menuId", menuId)
+        val storeIdInCart = cartRepository.findAllByUserId(user.id)
+        if (storeIdInCart!!.isNotEmpty()) {
+            if (storeIdInCart.first().menu.store.id != menus.store.id) {
+                throw Exception("다른 가게의 메뉴가 장바구니에 담겨있습니다. 장바구니를 삭제해주세요.")
+            }
+        }
+        val users = userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
         val carts = cartRepository.save(
             Cart(
                 menu = menus,
@@ -46,13 +52,14 @@ class OrderServiceImpl(
     @Transactional
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
     override fun getCart(user: UserPrincipal): List<CartDto> {
-        val cart = cartRepository.findAllByUserId(user.id) ?: throw UserNotFoundException("user", user.id)
+        val cart = cartRepository.findAllByUserId(user.id) ?: throw ModelNotFoundException("user", user.id)
         return cart.map { CartDto.from(it) }
     }
 
     @Transactional
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
     override fun deleteCart(user: UserPrincipal): String {
+        if (cartRepository.findAllByUserId(user.id)!!.isEmpty()) throw OnlyModelNotFoundException("장바구니가 비어있습니다.")
         cartRepository.deleteAllByUserId(user.id)
         return "장바구니를 비웠습니다."
     }
@@ -60,20 +67,21 @@ class OrderServiceImpl(
 
     @Transactional
     override fun order(user: UserPrincipal): String {
-        val users = userRepository.findByIdOrNull(user.id) ?: throw UserNotFoundException("user", user.id)
+        val users = userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
 
         // cart repository 에서 메뉴 id, 메뉴 갯수 Pair 로 묶어 가져오기
-        val (menuIdList, countList) = cartRepository.findAllByUserId(user.id)
+        val (menuIdList, countList) = cartRepository.findAllByUserId(user.id)?.takeIf { it.isNotEmpty() }
             ?.let { carts ->
                 Pair(carts.map { it.menu.id!! }, carts.map { it.count })
-            } ?: throw UserNotFoundException("user", user.id) // 장바구니가 비어있습니다 출력해야함
+            } ?: throw ModelNotFoundException("cart", user.id)
 
         val orderHistory = historyRepository.save(History(users)).id
-            .let{ historyRepository.findByIdOrNull(it) ?: throw UserNotFoundException("user", user.id) }
+            .let { historyRepository.findByIdOrNull(it) ?: throw ModelNotFoundException("user", user.id) }
 
         // orderMap 에 저장
         for (l in menuIdList.indices) {
-            val menu = menuRepository.findByIdOrNull(menuIdList[l]) ?: throw MenuNotFoundException(menuIdList[l])
+            val menu =
+                menuRepository.findByIdOrNull(menuIdList[l]) ?: throw ModelNotFoundException("menu", menuIdList[l])
             orderMapRepository.save(OrderMap(menu, orderHistory, countList[l]))
         }
         // 삭제쿼리
@@ -85,15 +93,14 @@ class OrderServiceImpl(
     @Transactional
     override fun getHistory(user: UserPrincipal): MutableList<List<OrderMapDto>> {
         val historyIdList = historyRepository.findAllByUserId(user.id)
-            ?: throw Exception("orderHistory Not found")
+            ?: throw ModelNotFoundException("history", user.id)
         val orderHistoryList: MutableList<List<OrderMapDto>> = mutableListOf()
         for (l in historyIdList.indices) {
-            val orderHistory = historyIdList[l].id?.
-            let { orderMapRepository.findAllByHistoryId(it) }!!.
-            map{ it.toDto() }
+            val orderHistory = historyIdList[l].id?.let {
+                orderMapRepository.findAllByHistoryId(it)
+            }!!.map { it.toDto() }
             orderHistoryList += orderHistory
         }
         return orderHistoryList
     }
-
 }
