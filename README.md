@@ -36,4 +36,67 @@
 
 <img width="547" alt="스크린샷 2024-01-28 오후 11 30 22" src="https://github.com/hongdul/backoffice/assets/48382951/95fc33a3-f0af-461c-9a37-5b426eb4f104">
 
+## 패키지 구조
 
+src
+├── main
+│   ├── kotlin
+│   │   └── com
+│   │       └── example
+│   │           └── backoffice
+│   │               ├── BackofficeApplication.kt
+│   │               ├── domain
+│   │               │   ├── exception
+│   │               │   │   ├── ErrorResponse.kt
+│   │               │   │   └── dto
+│   │               │   ├── menu
+│   │               │   │   ├── controller
+│   │               │   │   ├── dto
+│   │               │   │   ├── model
+│   │               │   │   ├── repository
+│   │               │   │   └── service
+│   │               │   ├── order
+│   │               │   │   ├── controller
+│   │               │   │   ├── dto
+│   │               │   │   ├── model
+│   │               │   │   ├── repository
+│   │               │   │   └── service
+│   │               │   ├── review
+│   │               │   │   ├── controller
+│   │               │   │   ├── dto
+│   │               │   │   ├── model
+│   │               │   │   ├── repository
+│   │               │   │   └── service
+│   │               │   ├── store
+│   │               │   │   ├── controller
+│   │               │   │   ├── dto
+│   │               │   │   ├── model
+│   │               │   │   ├── repository
+│   │               │   │   └── service
+│   │               │   └── user
+│   │               │       ├── controller
+│   │               │       ├── dto
+│   │               │       ├── model
+│   │               │       ├── repository
+│   │               │       └── service
+│   │               └── infra
+│   │                   ├── querydsl
+│   │                   │   └── QueryDslSupport.kt
+│   │                   ├── security
+│   │                   │   ├── CustomAuthenticationEntryPoint.kt
+│   │                   │   ├── PasswordEncoderConfig.kt
+│   │                   │   ├── SecurityConfig.kt
+│   │                   │   ├── UserPrincipal.kt
+│   │                   │   └── jwt
+│   │                   └── swagger
+│   │                       └── SwaggerConfig.kt
+│   └── resources
+│       ├── application.yml
+│       ├── static
+│       └── templates
+└── test
+└── kotlin
+└── com
+└── example
+└── backoffice
+└── BackofficeApplicationTests.kt
