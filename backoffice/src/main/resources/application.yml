@@ -16,6 +16,7 @@ logging:
             bind: trace
       springframework:
         security: debug
+
 auth:
   jwt:
     issuer: team.sparta.com
