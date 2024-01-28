@@ -55,15 +55,14 @@ class UserController(
     }
 
     @Operation(summary = "사용자 정보 수정")
-    @PatchMapping("/{profileId}")
+    @PutMapping("/profile/update")
     fun updateInfo(
-        @PathVariable profileId: Long,
         @AuthenticationPrincipal user: UserPrincipal,
         @RequestBody userInfoRequest: UserInfoRequest
     ): ResponseEntity<ProfileDto> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(userService.updateInfo(profileId, userInfoRequest, user))
+            .body(userService.updateInfo(userInfoRequest, user))
     }
 
     @Operation(summary = "사용자 정보 조회", description = "자신의 프로필 조회: 0 입력")

@@ -70,10 +70,9 @@ class UserServiceImpl(
 
     @Transactional
     @PreAuthorize("hasAnyRole('CUSTOMER', 'MANAGER')")
-    override fun updateInfo(profileId: Long, userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto {
-        val users = userRepository.findByIdOrNull(user.id) ?: throw ModelNotFoundException("user", user.id)
+    override fun updateInfo(userInfoRequest: UserInfoRequest, user: UserPrincipal): ProfileDto {
         val profiles =
-            profileRepository.findByIdAndUser(profileId, users) ?: throw ModelNotFoundException("profile", profileId)
+            profileRepository.findByUserId(user.id) ?: throw ModelNotFoundException("profile", user.id)
         profiles.changeInfo(userInfoRequest)
         return ProfileDto.from(profileRepository.save(profiles))
 
