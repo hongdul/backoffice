@@ -29,7 +29,7 @@ class StoreServiceImpl(
         return storeRepository.findAll(pageable).map { from(it) }
     }
 
-    @PreAuthorize("hasAnyRole('MANAGER', 'CUSTOMER')")
+//    @PreAuthorize("hasAnyRole('MANAGER', 'CUSTOMER')")
     override fun getStoreById(storeId: Long): StoreInfo {
         val foundStore = storeRepository.findByIdOrNull(storeId)
             ?: throw ModelNotFoundException("store", storeId)

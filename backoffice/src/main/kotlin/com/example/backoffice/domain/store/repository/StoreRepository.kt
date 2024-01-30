@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface StoreRepository: JpaRepository<Store, Long>, CustomStoreRepository {
     fun findByIdAndUser(storeId: Long, userId: User): Store?
+
 }
